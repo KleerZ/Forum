@@ -1,0 +1,46 @@
+<app-fullscreen-loader *ngIf="!waiter"></app-fullscreen-loader>
+
+<div *ngIf="waiter" class="w-100 m-0 p-0 row d-flex justify-content-center">
+
+  <div class="row w-100 d-flex justify-content-center align-items-center mb-3 m-0">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h6 class="d-flex w-100 justify-content-center ">{{'HomePage.TagCloud' | translate}}</h6>
+      <button type="button"
+              class="btn btn-danger"
+              (click)="resetTag()">
+        {{'HomePage.Reset' | translate}}
+      </button>
+    </div>
+
+    <div class="flex-wrap tag-container d-flex flex-row w-100">
+      <input (click)="onTagSelect($event)"
+             *ngFor="let tag of tags"
+             type="button"
+             class="tag btn text-white"
+             value="{{tag.name}}">
+    </div>
+  </div>
+
+  <div class="container d-flex justify-content-center mb-2 flex-wrap">
+    <button
+        (click)="getRecentReviews()"
+       class="btn btn-outline-success control-btn mr-2 mb-2">
+      {{'HomePage.Recent' | translate}}
+    </button>
+    <button
+       (click)="getMostRatedReviews()"
+       class="btn btn-outline-success control-btn mr-2 mb-2">
+      {{'HomePage.MostRated' | translate}}
+    </button>
+    <form [formGroup]="countInput" class=" mb-2">
+      <input (change)="checkCountInput()" min="1" formControlName="count" value=""  type="number"
+             class="form-control" id="count-input" placeholder="{{'HomePage.Count' | translate}}">
+    </form>
+  </div>
+
+
+  <app-data-loader class="h-100 w-100" *ngIf="!this.reviewService.waiter"></app-data-loader>
+
+  <app-reviews-grid [ReviewForm]="reviewForm" [reviews]="reviewService.reviews"></app-reviews-grid>
+
+</div>
