@@ -33,6 +33,8 @@ public class GetAllReviewsDto : IMapWith<Domain.Discussion>
                 o => o.MapFrom(u => u.Category.Name))
             .ForMember(u => u.CreationDate,
                 o => o.MapFrom(u => u.CreationDate))
+            .ForMember(u => u.ImageUrl,
+                o => o.MapFrom(u => u.Images!.FirstOrDefault()!.Url ?? ""))
             .ForMember(u => u.Tags,
                 o => o.MapFrom(u => 
                     u.Tags.Select(t => t.Name)));

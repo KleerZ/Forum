@@ -28,6 +28,11 @@ public class GetReviewsByParamQueryHandler
         CancellationToken cancellationToken)
     {
         var reviews = await _context.Discussions
+            .Include(c => c.Category)
+            .Include(c => c.Tags)
+            .Include(c => c.Theme)
+            .Include(c => c.Images)
+            .Include(c => c.User)
             .ProjectTo<GetAllReviewsDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
         if (request.Tag is not null)
