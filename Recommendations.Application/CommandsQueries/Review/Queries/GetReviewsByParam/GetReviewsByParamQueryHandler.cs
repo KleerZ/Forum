@@ -1,4 +1,7 @@
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Recommendations.Application.CommandsQueries.Review.Queries.GetMostRatedList;
 using Recommendations.Application.CommandsQueries.Review.Queries.GetRecentList;
 using Recommendations.Application.Common.Constants;
@@ -11,25 +14,22 @@ public class GetReviewsByParamQueryHandler
 {
     private readonly IRecommendationsDbContext _context;
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
     public GetReviewsByParamQueryHandler(IRecommendationsDbContext context, 
-        IMediator mediator)
+        IMediator mediator, IMapper mapper)
     {
         _context = context;
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     public async Task<GetAllReviewsVm> Handle(GetReviewsByParamQuery request,
         CancellationToken cancellationToken)
     {
-        var reviews = request.Filtrate switch
-        {
-            FiltrateParameters.MostRated =>
-                await GetMostRatedReviews(request.Count, cancellationToken),
-            FiltrateParameters.Recent =>
-                await GetRecentReviews(request.Count, cancellationToken),
-            _ => throw new ArgumentOutOfRangeException()
-        };
+        var reviews = await _context.Discussions
+            .ProjectTo<GetAllReviewsDto>(_mapper.ConfigurationProvider)
+            .ToListAsync(cancellationToken);
         if (request.Tag is not null)
             reviews = reviews.Where(r => 
                 r.Tags.Contains(request.Tag)).ToList();
