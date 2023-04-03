@@ -23,9 +23,9 @@ public class GetAllCommentsQueryHandler : IRequestHandler<GetAllCommentsQuery, G
         CancellationToken cancellationToken)
     {
         var comments = await _context.Comments
-            .Include(c => c.Review)
+            .Include(c => c.Discussion)
             .Include(c => c.User)
-            .Where(c => c.Review.Id == request.ReviewId)
+            .Where(c => c.Discussion.Id == request.ReviewId)
             .OrderBy(c => c.CreationDate)
             .ProjectTo<GetAllCommentsDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);

@@ -3,7 +3,7 @@ using Recommendations.Application.Common.Mappings;
 
 namespace Recommendations.Application.Common.Clouds.Algolia;
 
-public class AlgoliaDto : IMapWith<Domain.Review>
+public class AlgoliaDto : IMapWith<Domain.Discussion>
 {
     public string ObjectID { get; set; }
     public DateTime CreationDate { get; set; }
@@ -17,15 +17,13 @@ public class AlgoliaDto : IMapWith<Domain.Review>
     
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<Domain.Review, AlgoliaDto>()
+        profile.CreateMap<Domain.Discussion, AlgoliaDto>()
             .ForMember(u => u.ObjectID,
                 o => o.MapFrom(u => u.Id.ToString()))
             .ForMember(u => u.CategoryName,
                 o => o.MapFrom(u => u.Category.Name))
             .ForMember(u => u.ProductName,
-                o => o.MapFrom(u => u.Product.Name))
-            .ForMember(u => u.AverageRating,
-                o => o.MapFrom(u => u.Product.AverageRate))
+                o => o.MapFrom(u => u.Theme.Name))
             .ForMember(u => u.Tags,
                 o => o.MapFrom(u => u.Tags
                     .Select(t => t.Name)))

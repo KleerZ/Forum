@@ -25,7 +25,7 @@ public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand,
     {
         var comment = _mapper.Map<Domain.Comment>(request);
         comment.User = await GetUser(request.UserId);
-        comment.Review = await GetReview(request.ReviewId);
+        comment.Discussion = await GetReview(request.ReviewId);
         
         await _context.Comments.AddAsync(comment, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
@@ -39,7 +39,7 @@ public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand,
         return await _mediator.Send(getUserQuery);
     }
     
-    private async Task<Domain.Review> GetReview(Guid reviewId)
+    private async Task<Domain.Discussion> GetReview(Guid reviewId)
     {
         var getReviewQuery = new GetReviewQuery(reviewId);
         return await _mediator.Send(getReviewQuery);

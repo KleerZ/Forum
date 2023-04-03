@@ -2,7 +2,6 @@ using AutoMapper;
 using MediatR;
 using Recommendations.Application.CommandsQueries.Image.Queries.GetImageListByReviewId;
 using Recommendations.Application.CommandsQueries.Like.Queries.GetLikeStatus;
-using Recommendations.Application.CommandsQueries.Rating.Queries.GetUserRating;
 using Recommendations.Application.CommandsQueries.Review.Queries.Get;
 using Recommendations.Application.Interfaces;
 
@@ -30,12 +29,11 @@ public class GetReviewDtoQueryHandler
         var getReviewDto = _mapper.Map<GetReviewDto>(review);
         getReviewDto.ImagesUrls = await GetImagesUrls(request.ReviewId, cancellationToken);
         getReviewDto.IsLike = await GetLikeStatus(request.UserId, request.ReviewId, cancellationToken);
-        getReviewDto.UserRating = await GetUserRating(request.UserId, review.Id, cancellationToken);
 
         return getReviewDto;
     }
 
-    private async Task<Domain.Review> GetReview(Guid reviewId,
+    private async Task<Domain.Discussion> GetReview(Guid reviewId,
         CancellationToken cancellationToken)
     {
         var getReviewQuery = new GetReviewQuery(reviewId);
@@ -48,15 +46,7 @@ public class GetReviewDtoQueryHandler
         var getLikeStatus = new GetLikeStatusQuery(userId, reviewId);
         return await _mediator.Send(getLikeStatus, cancellationToken);
     }
-    
-    private async Task<double> GetUserRating(Guid userId, Guid reviewId, 
-        CancellationToken cancellationToken)
-    {
-        var getRatingQuery = new GetUserRatingQuery(userId, reviewId);
-        var rating = await _mediator.Send(getRatingQuery, cancellationToken);
-        return rating?.Value ?? 1;
-    }
-    
+
     private async Task<List<string>?> GetImagesUrls(Guid reviewId,
         CancellationToken cancellationToken)
     {

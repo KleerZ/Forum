@@ -22,11 +22,11 @@ public class GetReviewsByUserIdQueryHandler
     public async Task<GetReviewsByUserIdVm> Handle(GetReviewsByUserIdQuery request,
         CancellationToken cancellationToken)
     {
-        var reviews = await _context.Reviews
+        var reviews = await _context.Discussions
             .Include(r => r.Category)
             .Include(r => r.Comments)
             .Include(r => r.Likes)
-            .Include(r => r.Product)
+            .Include(r => r.Theme)
             .Where(r => r.User.Id == request.UserId)
             .ProjectTo<GetReviewsByUserIdDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);

@@ -5,7 +5,7 @@ using Recommendations.Application.Common.Mappings;
 
 namespace Recommendations.Application.CommandsQueries.Review.Commands.Create;
 
-public class CreateReviewCommand : IRequest<Guid>, IMapWith<Domain.Review>
+public class CreateReviewCommand : IRequest<Guid>, IMapWith<Domain.Discussion>
 {
     public Guid UserId { get; set; }
     public string Title { get; set; }
@@ -18,15 +18,13 @@ public class CreateReviewCommand : IRequest<Guid>, IMapWith<Domain.Review>
 
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<CreateReviewCommand, Domain.Review>()
+        profile.CreateMap<CreateReviewCommand, Domain.Discussion>()
             .ForMember(u => u.Title,
                 o => o.MapFrom(u => u.Title))
             .ForMember(u => u.Category,
                 o => o.MapFrom(u => u.CategoryName))
             .ForMember(u => u.Description,
                 o => o.MapFrom(u => u.Description))
-            .ForMember(u => u.AuthorRate,
-                o => o.MapFrom(u => u.AuthorRate))
             .ForMember(u => u.Tags,
                 o => o.Ignore())
             .ForMember(u => u.Images,

@@ -4,9 +4,9 @@ using Recommendations.Domain;
 
 namespace Recommendations.Persistence.EntityTypeConfigurations;
 
-public class ProductConfiguration : IEntityTypeConfiguration<Product>
+public class ProductConfiguration : IEntityTypeConfiguration<Theme>
 {
-    public void Configure(EntityTypeBuilder<Product> builder)
+    public void Configure(EntityTypeBuilder<Theme> builder)
     {
         builder.HasKey(product => product.Id);
         builder.HasIndex(product => product.Id).IsUnique();
@@ -14,8 +14,5 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasIndex(product => product.Name).IsUnique();
         builder.Property(product => product.Name)
             .HasMaxLength(100);
-
-        builder.Property(product => product.AverageRate)
-            .HasDefaultValue(1);
     }
 }

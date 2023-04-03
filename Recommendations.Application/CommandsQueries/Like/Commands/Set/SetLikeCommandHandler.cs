@@ -41,7 +41,7 @@ public class SetLikeCommandHandler : IRequestHandler<SetLikeCommand, Guid>
         return await _mediator.Send(getLikeQuery, cancellationToken);
     }
     
-    private async Task<Domain.Review> GetReview(Guid reviewId,
+    private async Task<Domain.Discussion> GetReview(Guid reviewId,
         CancellationToken cancellationToken)
     {
         var getReviewQuery = new GetReviewQuery(reviewId);

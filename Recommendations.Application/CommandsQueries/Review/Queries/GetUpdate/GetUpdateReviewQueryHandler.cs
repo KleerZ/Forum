@@ -22,9 +22,9 @@ public class GetUpdateReviewQueryHandler
     public async Task<GetUpdateReviewDto> Handle(GetUpdateReviewQuery request,
         CancellationToken cancellationToken)
     {
-        var review = await _context.Reviews
+        var review = await _context.Discussions
             .Include(r => r.Tags)
-            .Include(r => r.Product)
+            .Include(r => r.Theme)
             .Include(r => r.Category)
             .Include(r => r.Images)
             .FirstOrDefaultAsync(r => r.Id == request.ReviewId, cancellationToken);

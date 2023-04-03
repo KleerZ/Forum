@@ -24,7 +24,7 @@ public class DeleteReviewCommandHandler : IRequestHandler<DeleteReviewCommand, U
     {
         var review = await GetReview(request.ReviewId, cancellationToken);
 
-        _context.Reviews.Remove(review);
+        _context.Discussions.Remove(review);
         await _context.SaveChangesAsync(cancellationToken);
         
         await SetUserLikesCount(review.User.Id, cancellationToken);
@@ -34,7 +34,7 @@ public class DeleteReviewCommandHandler : IRequestHandler<DeleteReviewCommand, U
         return Unit.Value;
     }
 
-    private async Task<Domain.Review> GetReview(Guid reviewId,
+    private async Task<Domain.Discussion> GetReview(Guid reviewId,
         CancellationToken cancellationToken)
     {
         var getReviewQuery = new GetReviewQuery(reviewId);

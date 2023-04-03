@@ -23,7 +23,7 @@ public class CreateLikeCommandHandler
     {
         var like = new Domain.Like 
         {
-            Review = await GetReview(request.ReviewId, cancellationToken),
+            Discussion = await GetReview(request.ReviewId, cancellationToken),
             Status = true,
             User = await GetUser(request.UserId, cancellationToken)
         };
@@ -33,7 +33,7 @@ public class CreateLikeCommandHandler
         return like;
     }
     
-    private async Task<Domain.Review> GetReview(Guid reviewId,
+    private async Task<Domain.Discussion> GetReview(Guid reviewId,
         CancellationToken cancellationToken)
     {
         var getReviewCommand = new GetReviewQuery(reviewId);

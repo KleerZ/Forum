@@ -16,7 +16,7 @@ public class GetImageListByReviewIdQueryHandler
         CancellationToken cancellationToken)
     {
         var images = await _context.Images
-            .Where(i => i.Review.Id == request.ReviewId)
+            .Where(i => i.Discussion.Id == request.ReviewId)
             .ToListAsync(cancellationToken);
 
         return images;

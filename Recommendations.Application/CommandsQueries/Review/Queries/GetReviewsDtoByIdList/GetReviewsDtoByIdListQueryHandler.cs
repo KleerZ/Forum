@@ -22,7 +22,7 @@ public class GetReviewsDtoByIdListQueryHandler
     public async Task<IEnumerable<GetAllReviewsDto>> Handle(GetReviewsDtoByIdListQuery request,
         CancellationToken cancellationToken)
     {
-        var reviews = await _context.Reviews
+        var reviews = await _context.Discussions
             .Where(r => request.IdList.Contains(r.Id))
             .ProjectTo<GetAllReviewsDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);

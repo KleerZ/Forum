@@ -6,5 +6,5 @@ public class Like
     public bool Status { get; set; }
     
     public User User { get; set; }
-    public Review Review { get; set; }
+    public Discussion Discussion { get; set; }
 }

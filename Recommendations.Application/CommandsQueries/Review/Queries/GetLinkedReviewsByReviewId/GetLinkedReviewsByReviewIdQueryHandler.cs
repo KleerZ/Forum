@@ -22,10 +22,10 @@ public class GetLinkedReviewsByReviewIdQueryHandler
     public async Task<IEnumerable<GetLinkedReviewsDto>> Handle(GetLinkedReviewsByReviewIdQuery request,
         CancellationToken cancellationToken)
     {
-        var reviews = await _context.Reviews
+        var reviews = await _context.Discussions
             .Where(r => r.Id == request.ReviewId)
-            .Select(r => r.Product)
-            .SelectMany(p => p.Reviews)
+            .Select(r => r.Theme)
+            .SelectMany(p => p.Discussions)
             .Where(r => r.Id != request.ReviewId)
             .ProjectTo<GetLinkedReviewsDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);

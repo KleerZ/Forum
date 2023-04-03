@@ -22,6 +22,21 @@ namespace Recommendations.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("DiscussionTag", b =>
+                {
+                    b.Property<Guid>("DiscussionsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TagsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("DiscussionsId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("DiscussionTag");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
                     b.Property<Guid>("Id")
@@ -182,7 +197,7 @@ namespace Recommendations.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("ReviewId")
+                    b.Property<Guid>("DiscussionId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Text")
@@ -195,142 +210,21 @@ namespace Recommendations.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DiscussionId");
+
                     b.HasIndex("Id")
                         .IsUnique();
-
-                    b.HasIndex("ReviewId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Recommendations.Domain.Image", b =>
+            modelBuilder.Entity("Recommendations.Domain.Discussion", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("FolderName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("ReviewId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.HasIndex("ReviewId");
-
-                    b.ToTable("Images");
-                });
-
-            modelBuilder.Entity("Recommendations.Domain.Like", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ReviewId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false);
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.HasIndex("ReviewId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Likes");
-                });
-
-            modelBuilder.Entity("Recommendations.Domain.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<double>("AverageRate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("double precision")
-                        .HasDefaultValue(1.0);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Recommendations.Domain.Rating", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Value")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Ratings");
-                });
-
-            modelBuilder.Entity("Recommendations.Domain.Review", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("AuthorRate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1);
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uuid");
@@ -343,7 +237,7 @@ namespace Recommendations.Persistence.Migrations
                         .HasMaxLength(5000)
                         .HasColumnType("character varying(5000)");
 
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid>("ThemeId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Title")
@@ -361,11 +255,71 @@ namespace Recommendations.Persistence.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ThemeId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Discussions");
+                });
+
+            modelBuilder.Entity("Recommendations.Domain.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("DiscussionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FolderName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiscussionId");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("Recommendations.Domain.Like", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("DiscussionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiscussionId");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Recommendations.Domain.Tag", b =>
@@ -387,6 +341,28 @@ namespace Recommendations.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("Recommendations.Domain.Theme", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Themes");
                 });
 
             modelBuilder.Entity("Recommendations.Domain.User", b =>
@@ -468,19 +444,19 @@ namespace Recommendations.Persistence.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("ReviewTag", b =>
+            modelBuilder.Entity("DiscussionTag", b =>
                 {
-                    b.Property<Guid>("ReviewsId")
-                        .HasColumnType("uuid");
+                    b.HasOne("Recommendations.Domain.Discussion", null)
+                        .WithMany()
+                        .HasForeignKey("DiscussionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<Guid>("TagsId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("ReviewsId", "TagsId");
-
-                    b.HasIndex("TagsId");
-
-                    b.ToTable("ReviewTag");
+                    b.HasOne("Recommendations.Domain.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -536,9 +512,9 @@ namespace Recommendations.Persistence.Migrations
 
             modelBuilder.Entity("Recommendations.Domain.Comment", b =>
                 {
-                    b.HasOne("Recommendations.Domain.Review", "Review")
+                    b.HasOne("Recommendations.Domain.Discussion", "Discussion")
                         .WithMany("Comments")
-                        .HasForeignKey("ReviewId")
+                        .HasForeignKey("DiscussionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -548,115 +524,74 @@ namespace Recommendations.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Review");
+                    b.Navigation("Discussion");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Recommendations.Domain.Image", b =>
-                {
-                    b.HasOne("Recommendations.Domain.Review", "Review")
-                        .WithMany("Images")
-                        .HasForeignKey("ReviewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Review");
-                });
-
-            modelBuilder.Entity("Recommendations.Domain.Like", b =>
-                {
-                    b.HasOne("Recommendations.Domain.Review", "Review")
-                        .WithMany("Likes")
-                        .HasForeignKey("ReviewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Recommendations.Domain.User", "User")
-                        .WithMany("Likes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Review");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Recommendations.Domain.Rating", b =>
-                {
-                    b.HasOne("Recommendations.Domain.Product", "Product")
-                        .WithMany("UserRatings")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Recommendations.Domain.User", "User")
-                        .WithMany("Ratings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Recommendations.Domain.Review", b =>
+            modelBuilder.Entity("Recommendations.Domain.Discussion", b =>
                 {
                     b.HasOne("Recommendations.Domain.Category", "Category")
-                        .WithMany("Reviews")
+                        .WithMany("Discussions")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Recommendations.Domain.Product", "Product")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("Recommendations.Domain.Theme", "Theme")
+                        .WithMany("Discussions")
+                        .HasForeignKey("ThemeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Recommendations.Domain.User", "User")
-                        .WithMany("Reviews")
+                        .WithMany("Discussions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
 
-                    b.Navigation("Product");
+                    b.Navigation("Theme");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ReviewTag", b =>
+            modelBuilder.Entity("Recommendations.Domain.Image", b =>
                 {
-                    b.HasOne("Recommendations.Domain.Review", null)
-                        .WithMany()
-                        .HasForeignKey("ReviewsId")
+                    b.HasOne("Recommendations.Domain.Discussion", "Discussion")
+                        .WithMany("Images")
+                        .HasForeignKey("DiscussionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Recommendations.Domain.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
+                    b.Navigation("Discussion");
+                });
+
+            modelBuilder.Entity("Recommendations.Domain.Like", b =>
+                {
+                    b.HasOne("Recommendations.Domain.Discussion", "Discussion")
+                        .WithMany("Likes")
+                        .HasForeignKey("DiscussionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Recommendations.Domain.User", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Discussion");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Recommendations.Domain.Category", b =>
                 {
-                    b.Navigation("Reviews");
+                    b.Navigation("Discussions");
                 });
 
-            modelBuilder.Entity("Recommendations.Domain.Product", b =>
-                {
-                    b.Navigation("Reviews");
-
-                    b.Navigation("UserRatings");
-                });
-
-            modelBuilder.Entity("Recommendations.Domain.Review", b =>
+            modelBuilder.Entity("Recommendations.Domain.Discussion", b =>
                 {
                     b.Navigation("Comments");
 
@@ -665,15 +600,18 @@ namespace Recommendations.Persistence.Migrations
                     b.Navigation("Likes");
                 });
 
+            modelBuilder.Entity("Recommendations.Domain.Theme", b =>
+                {
+                    b.Navigation("Discussions");
+                });
+
             modelBuilder.Entity("Recommendations.Domain.User", b =>
                 {
                     b.Navigation("Comments");
 
+                    b.Navigation("Discussions");
+
                     b.Navigation("Likes");
-
-                    b.Navigation("Ratings");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

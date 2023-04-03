@@ -17,7 +17,7 @@ public class GetFirstImageUrlByReviewIdQueryHandler
     {
         var images = await _context.Images
             .FirstOrDefaultAsync(image =>
-                image.Review.Id == request.ReviewId, cancellationToken);
+                image.Discussion.Id == request.ReviewId, cancellationToken);
 
         return images?.Url;
     }

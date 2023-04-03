@@ -1,6 +1,5 @@
 using MediatR;
 using Recommendations.Application.CommandsQueries.Image.Queries.GetFirstImageUrlByReviewId;
-using Recommendations.Application.CommandsQueries.Review.Queries.GetAll;
 using Recommendations.Application.CommandsQueries.Review.Queries.GetReviewsDtoByIdList;
 using Recommendations.Application.Interfaces;
 

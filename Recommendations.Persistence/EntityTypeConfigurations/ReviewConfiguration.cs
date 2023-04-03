@@ -4,9 +4,9 @@ using Recommendations.Domain;
 
 namespace Recommendations.Persistence.EntityTypeConfigurations;
 
-public class ReviewConfiguration : IEntityTypeConfiguration<Review>
+public class ReviewConfiguration : IEntityTypeConfiguration<Discussion>
 {
-    public void Configure(EntityTypeBuilder<Review> builder)
+    public void Configure(EntityTypeBuilder<Discussion> builder)
     {
         builder.HasKey(review => review.Id);
         builder.HasIndex(review => review.Id).IsUnique();
@@ -16,8 +16,5 @@ public class ReviewConfiguration : IEntityTypeConfiguration<Review>
 
         builder.Property(review => review.Description)
             .HasMaxLength(5000);
-
-        builder.Property(review => review.AuthorRate)
-            .HasDefaultValue(1);
     }
 }

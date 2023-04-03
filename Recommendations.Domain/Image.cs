@@ -7,5 +7,5 @@ public class Image
     public string Url { get; set; }
     public string FolderName { get; set; }
     
-    public Review Review { get; set; }
+    public Discussion Discussion { get; set; }
 }

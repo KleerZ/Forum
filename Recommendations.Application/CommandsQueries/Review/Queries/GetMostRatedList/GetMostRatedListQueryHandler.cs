@@ -3,7 +3,6 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Recommendations.Application.CommandsQueries.Image.Queries.GetFirstImageUrlByReviewId;
-using Recommendations.Application.CommandsQueries.Review.Queries.GetAll;
 using Recommendations.Application.Interfaces;
 
 namespace Recommendations.Application.CommandsQueries.Review.Queries.GetMostRatedList;
@@ -29,11 +28,10 @@ public class GetMostRatedListQueryHandler
         if (request.Count is null)
             throw new NullReferenceException("Missing reviews count");
         
-        var reviews = await _context.Reviews
+        var reviews = await _context.Discussions
             .Include(r => r.Tags)
             .Include(r => r.Category)
-            .Include(r => r.Product)
-            .OrderByDescending(r => r.Product.AverageRate)
+            .Include(r => r.Theme)
             .Take(request.Count.Value)
             .ProjectTo<GetAllReviewsDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);

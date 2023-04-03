@@ -18,7 +18,7 @@ public class GetLikeStatusQueryHandler
         CancellationToken cancellationToken)
     {
         var like = await _context.Likes
-            .FirstOrDefaultAsync(l => l.Review.Id == request.ReviewId
+            .FirstOrDefaultAsync(l => l.Discussion.Id == request.ReviewId
                                       && l.User.Id == request.UserId, cancellationToken);
         return like?.Status ?? false;
     }

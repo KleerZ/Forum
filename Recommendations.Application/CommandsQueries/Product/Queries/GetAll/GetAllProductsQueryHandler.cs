@@ -22,7 +22,7 @@ public class GetAllProductsQueryHandler
     public async Task<GetAllProductsVm> Handle(GetAllProductsQuery request,
         CancellationToken cancellationToken)
     {
-        var products = await _context.Products
+        var products = await _context.Themes
             .ProjectTo<GetAllProductsDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 

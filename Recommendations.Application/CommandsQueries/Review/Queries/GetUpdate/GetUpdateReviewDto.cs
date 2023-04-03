@@ -3,7 +3,7 @@ using Recommendations.Application.Common.Mappings;
 
 namespace Recommendations.Application.CommandsQueries.Review.Queries.GetUpdate;
 
-public class GetUpdateReviewDto : IMapWith<Domain.Review>
+public class GetUpdateReviewDto : IMapWith<Domain.Discussion>
 {
     public string Title { get; set; }
     public string ProductName { get; set; }
@@ -15,17 +15,15 @@ public class GetUpdateReviewDto : IMapWith<Domain.Review>
 
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<Domain.Review, GetUpdateReviewDto>()
+        profile.CreateMap<Domain.Discussion, GetUpdateReviewDto>()
             .ForMember(u => u.Title,
                 o => o.MapFrom(u => u.Title))
             .ForMember(u => u.ProductName,
-                o => o.MapFrom(u => u.Product.Name))
+                o => o.MapFrom(u => u.Theme.Name))
             .ForMember(u => u.CategoryName,
                 o => o.MapFrom(u => u.Category.Name))
             .ForMember(u => u.Description,
                 o => o.MapFrom(u => u.Description))
-            .ForMember(u => u.AuthorRate,
-                o => o.MapFrom(u => u.AuthorRate))
             .ForMember(u => u.ImagesUrls,
                 o => o.MapFrom(u => u.Images
                     .Select(i => i.Url)))

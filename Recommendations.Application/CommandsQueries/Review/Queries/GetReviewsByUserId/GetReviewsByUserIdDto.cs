@@ -3,7 +3,7 @@ using Recommendations.Application.Common.Mappings;
 
 namespace Recommendations.Application.CommandsQueries.Review.Queries.GetReviewsByUserId;
 
-public class GetReviewsByUserIdDto : IMapWith<Domain.Review>
+public class GetReviewsByUserIdDto : IMapWith<Domain.Discussion>
 {
     public Guid ReviewId { get; set; }
     public string ReviewTitle { get; set; }
@@ -16,7 +16,7 @@ public class GetReviewsByUserIdDto : IMapWith<Domain.Review>
     
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<Domain.Review, GetReviewsByUserIdDto>()
+        profile.CreateMap<Domain.Discussion, GetReviewsByUserIdDto>()
             .ForMember(u => u.ReviewId,
                 o => o.MapFrom(u => u.Id))
             .ForMember(u => u.ReviewTitle,
@@ -26,13 +26,11 @@ public class GetReviewsByUserIdDto : IMapWith<Domain.Review>
             .ForMember(u => u.Category,
                 o => o.MapFrom(u => u.Category.Name))
             .ForMember(u => u.Product,
-                o => o.MapFrom(u => u.Product.Name))
+                o => o.MapFrom(u => u.Theme.Name))
             .ForMember(u => u.LikesCount,
                 o => o.MapFrom(u => u.Likes
                     .Count(l => l.Status)))
             .ForMember(u => u.CommentsCount,
-                o => o.MapFrom(u => u.Comments.Count))
-            .ForMember(u => u.AverageRate,
-                o => o.MapFrom(u => u.Product.AverageRate));
+                o => o.MapFrom(u => u.Comments.Count));
     }
 }

@@ -16,7 +16,7 @@ public class GetAllUserLikesCountQueryHandler
         CancellationToken cancellationToken)
     {
         var likesCount = await _context.Likes
-            .Where(l => l.Review.User.Id == request.UserId)
+            .Where(l => l.Discussion.User.Id == request.UserId)
             .CountAsync(l => l.Status, cancellationToken);
         return likesCount;
     }

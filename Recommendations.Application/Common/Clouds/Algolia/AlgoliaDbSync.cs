@@ -23,13 +23,13 @@ public class AlgoliaDbSync
     public async Task Synchronize()
     {
         var trackedEntities = _context.ChangeTracker
-            .Entries<Review>()
+            .Entries<Discussion>()
             .ToList();
         foreach (var entity in trackedEntities)
             await StartOperation(entity);
     }
 
-    private async Task StartOperation(EntityEntry<Review> entityEntry)
+    private async Task StartOperation(EntityEntry<Discussion> entityEntry)
     {
         var entity = entityEntry.Entity;
         await LoadAllEntityReferences(entity);
@@ -46,17 +46,17 @@ public class AlgoliaDbSync
         }
     }
 
-    private async Task LoadAllEntityReferences(Review review)
+    private async Task LoadAllEntityReferences(Discussion discussion)
     {
-        await _context.Reviews.Entry(review)
+        await _context.Discussions.Entry(discussion)
             .Reference(r => r.Category).LoadAsync();
-        await _context.Reviews.Entry(review)
+        await _context.Discussions.Entry(discussion)
             .Collection(r => r.Comments).LoadAsync();
-        await _context.Reviews.Entry(review)
+        await _context.Discussions.Entry(discussion)
             .Collection(r => r.Likes).LoadAsync();
-        await _context.Reviews.Entry(review)
-            .Reference(r => r.Product).LoadAsync();
-        await _context.Reviews.Entry(review)
+        await _context.Discussions.Entry(discussion)
+            .Reference(r => r.Theme).LoadAsync();
+        await _context.Discussions.Entry(discussion)
             .Collection(r => r.Tags).LoadAsync();
     }
 }

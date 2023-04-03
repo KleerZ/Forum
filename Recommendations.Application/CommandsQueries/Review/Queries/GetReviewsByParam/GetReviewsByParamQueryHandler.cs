@@ -1,5 +1,4 @@
 using MediatR;
-using Recommendations.Application.CommandsQueries.Review.Queries.GetAll;
 using Recommendations.Application.CommandsQueries.Review.Queries.GetMostRatedList;
 using Recommendations.Application.CommandsQueries.Review.Queries.GetRecentList;
 using Recommendations.Application.Common.Constants;

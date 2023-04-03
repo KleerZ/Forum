@@ -1,4 +1,4 @@
-namespace Recommendations.Application.CommandsQueries.Review.Queries.GetAll;
+namespace Recommendations.Application.CommandsQueries.Review.Queries;
 
 public class GetAllReviewsVm
 {

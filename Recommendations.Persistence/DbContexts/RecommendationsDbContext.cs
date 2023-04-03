@@ -13,11 +13,10 @@ public sealed class RecommendationsDbContext : IdentityDbContext<User, IdentityR
     IRecommendationsDbContext
 {
     public DbSet<User> Users { get; set; }
-    public DbSet<Review> Reviews { get; set; }
+    public DbSet<Discussion> Discussions { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<Category> Categories { get; set; }
-    public DbSet<Product> Products { get; set; }
-    public DbSet<Rating> Ratings { get; set; }
+    public DbSet<Theme> Themes { get; set; }
     public DbSet<Like> Likes { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Image> Images { get; set; }
@@ -38,7 +37,6 @@ public sealed class RecommendationsDbContext : IdentityDbContext<User, IdentityR
         builder.ApplyConfiguration(new ImageConfiguration());
         builder.ApplyConfiguration(new LikeConfiguration());
         builder.ApplyConfiguration(new ProductConfiguration());
-        builder.ApplyConfiguration(new RatingConfiguration());
         builder.ApplyConfiguration(new ReviewConfiguration());
         builder.ApplyConfiguration(new TagConfiguration());
         builder.ApplyConfiguration(new UserConfiguration());

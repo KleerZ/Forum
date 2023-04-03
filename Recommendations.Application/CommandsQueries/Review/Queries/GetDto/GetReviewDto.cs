@@ -4,7 +4,7 @@ using Recommendations.Application.Common.Mappings;
 
 namespace Recommendations.Application.CommandsQueries.Review.Queries.GetDto;
 
-public class GetReviewDto : IMapWith<Domain.Review>
+public class GetReviewDto : IMapWith<Domain.Discussion>
 {
     public string AuthorName { get; set; }
     public double AverageRate { get; set; }
@@ -23,21 +23,17 @@ public class GetReviewDto : IMapWith<Domain.Review>
 
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<Domain.Review, GetReviewDto>()
+        profile.CreateMap<Domain.Discussion, GetReviewDto>()
             .ForMember(u => u.AuthorName,
                 o => o.MapFrom(u => u.User.UserName))
             .ForMember(u => u.AuthorLikesCount,
                 o => o.MapFrom(u => u.User.LikesCount))
-            .ForMember(u => u.AverageRate,
-                o => o.MapFrom(u => u.Product.AverageRate))
             .ForMember(u => u.ReviewTitle,
                 o => o.MapFrom(u => u.Title))
             .ForMember(u => u.ProductName,
-                o => o.MapFrom(u => u.Product.Name))
+                o => o.MapFrom(u => u.Theme.Name))
             .ForMember(u => u.Category,
                 o => o.MapFrom(u => u.Category.Name))
-            .ForMember(u => u.AuthorRate,
-                o => o.MapFrom(u => u.AuthorRate))
             .ForMember(u => u.CreationDate,
                 o => o.MapFrom(u => u.CreationDate))
             .ForMember(u => u.Description,

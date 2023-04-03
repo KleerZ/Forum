@@ -5,7 +5,7 @@ using Recommendations.Application.Interfaces;
 
 namespace Recommendations.Application.CommandsQueries.Review.Queries.Get;
 
-public class GetReviewQueryHandler : IRequestHandler<GetReviewQuery, Domain.Review>
+public class GetReviewQueryHandler : IRequestHandler<GetReviewQuery, Domain.Discussion>
 {
     private readonly IRecommendationsDbContext _context;
 
@@ -14,12 +14,11 @@ public class GetReviewQueryHandler : IRequestHandler<GetReviewQuery, Domain.Revi
         _context = context;
     }
 
-    public async Task<Domain.Review> Handle(GetReviewQuery request,
+    public async Task<Domain.Discussion> Handle(GetReviewQuery request,
         CancellationToken cancellationToken)
     {
-        var review = await _context.Reviews
-            .Include(r => r.Product)
-            .ThenInclude(r => r.UserRatings)
+        var review = await _context.Discussions
+            .Include(r => r.Theme)
             .Include(r => r.User)
             .Include(r => r.Category)
             .Include(r => r.Likes)

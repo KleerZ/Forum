@@ -18,7 +18,7 @@ public class GetUserQueryHandler : IRequestHandler<GetUserQuery, Domain.User>
         CancellationToken cancellationToken)
     {
         var user = await _context.Users
-            .Include(r => r.Reviews)
+            .Include(r => r.Discussions)
             .Include(r => r.Likes)
             .FirstOrDefaultAsync(r => r.Id == request.UserId, cancellationToken);
         if (user is null)

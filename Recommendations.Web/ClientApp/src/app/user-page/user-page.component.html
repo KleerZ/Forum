@@ -25,7 +25,6 @@
          <option value="product">{{'Profile.Product' | translate}}</option>
          <option value="likesCount">{{'Profile.LikesCount' | translate}}</option>
          <option value="commentsCount">{{'Profile.CommentsCount' | translate}}</option>
-         <option value="averageRate">{{'Profile.AverageRate' | translate}}</option>
        </select>
      </div>
      <div class="col-md-5 m-0 p-0 mb-2">
@@ -104,14 +103,6 @@
                             name="{{'Profile.CommentsCount' | translate}}">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.commentsCount}}
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column [canAutoResize]="false"
-                            prop="averageRate"
-                            name="{{'Profile.AverageRate' | translate}}">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{row.averageRate.toFixed(1)}}
         </ng-template>
       </ngx-datatable-column>
 
