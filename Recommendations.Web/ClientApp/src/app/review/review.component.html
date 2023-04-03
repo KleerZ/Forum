@@ -10,7 +10,7 @@
       <div class="d-flex gap-4 align-items-center flex-wrap justify-content-between">
         <div class="d-flex flex-column">
           <span class="wrap">
-            {{'ReviewPage.Author' | translate}} {{review.authorName}} ({{review.authorLikesCount}})
+            {{'ReviewPage.Author' | translate}} {{review.authorName}}
           </span>
           <span class="wrap">
             {{'ReviewPage.CreationDate' | translate}} {{review.creationDate | date:'dd.MM.YY, HH:mm':'UTC+3'}}
@@ -54,14 +54,10 @@
 
     <div class="row d-flex flex-column p-0 mb-2">
       <div class="title-container">
-        <div class="rating-bar mt-2 mb-3 m-0 p-0">
-          <div class="d-flex flex-column">
-            <span>{{'ReviewPage.RateProduct' | translate}}</span>
-            <ngb-rating class="no-print" (rateChange)="onRateChange($event)"
-                        style="font-size: 25px; padding: 0" [max]="5" [(rate)]="rate" [readonly]="false"></ngb-rating>
-          </div>
+        <div class="row d-flex flex-row">
+          <h4 id="review-title" class="mb-2 wrap">{{review.reviewTitle}}</h4>
 
-          <div class="h-100 d-flex justify-content-center align-items-center flex-column">
+          <div class="h-100 d-flex w-auto mt-1 justify-content-center align-items-center flex-column">
             <button [style.background]="this.review.isLike === true ? 'green' : 'black'"
                     id="likeBtn" (click)="onLike()" class="btn">
               <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -71,11 +67,7 @@
             </button>
             <span>{{review.likesCount}}</span>
           </div>
-        </div>
-
-        <div>
-          <h4 id="review-title" class="mb-2 wrap">{{review.reviewTitle}}</h4>
-          <div class="wrap">{{'ReviewPage.AverageRating' | translate}} {{review.averageRate.toFixed(1)}}</div>
+<!--          <div class="wrap">{{'ReviewPage.AverageRating' | translate}} {{review.averageRate.toFixed(1)}}</div>-->
         </div>
       </div>
 
@@ -86,7 +78,7 @@
 
       <h6 class="mb-2 wrap mt-3">{{'ReviewPage.ProductName' | translate}} {{review.productName}}</h6>
       <h6 class="mb-2 wrap">{{'ReviewPage.Category' | translate}} {{review.category}}</h6>
-      <h6 class="mb-2 wrap">{{'ReviewPage.AuthorRating' | translate}} {{review.authorRate}}</h6>
+<!--      <h6 class="mb-2 wrap">{{'ReviewPage.AuthorRating' | translate}} {{review.authorRate}}</h6>-->
       <h6 class="wrap">{{'ReviewPage.Tags' | translate}} {{review.tags}}</h6>
     </div>
 
@@ -119,7 +111,7 @@
 
       <div class="comment mb-2" *ngFor="let comment of this.signalrService.comments">
         <span class="comment-head mb-2">
-          <div class="mr-3 wrap">{{comment.authorName}} ({{comment.authorLikesCount}})</div>
+          <div class="mr-3 wrap">{{comment.authorName}}</div>
           <div class="wrap">{{comment.creationDate | date:'dd.MM.YY, HH:mm':'UTC+3'}}</div>
         </span>
         <div class="comment-text-container wrap">
