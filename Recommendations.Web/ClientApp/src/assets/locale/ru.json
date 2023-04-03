@@ -41,7 +41,7 @@
   "ReviewForm": {
     "AddImage": "Добавить изображение (макс. - 5bm)",
     "ReviewTitle": "Заголовок обзора",
-    "ProductName": "Произведение",
+    "ProductName": "Тема",
     "Category": "Категория",
     "Tags": "Теги",
     "EnterTag": "Введите новый тег",
@@ -50,9 +50,9 @@
     "CreateReview": "Создание обзора",
     "ChangeReview": "Изменить обзор",
     "Send": "Отправить",
-    "SelectLinkProduction": "Выберите произведение",
-    "SelectOrCreateProduction": "Выберите произведение или введите новое",
-    "EnterProductName": "Введите новое произведение"
+    "SelectLinkProduction": "Выберите тему",
+    "SelectOrCreateProduction": "Выберите тему или введите новую",
+    "EnterProductName": "Введите новую тему"
   },
   "Header": {
     "Theme": "Тема:",
@@ -67,9 +67,9 @@
   "ReviewPage": {
     "Author": "Автор:",
     "CreationDate": "Дата создания:",
-    "RateProduct": "Оцените произведение!",
+    "RateProduct": "Оцените тему!",
     "AverageRating": "Средняя оценка:",
-    "ProductName": "Произведение:",
+    "ProductName": "Тема:",
     "Category": "Категория:",
     "AuthorRating": "Оценка автора:",
     "Tags": "Теги:",
@@ -86,7 +86,7 @@
     "MostRated": "Самые оценённые",
     "Count": "Количество",
     "AverageRate": "Средняя оценка:",
-    "Product": "Произведение:",
+    "Product": "Тема:",
     "Category": "Категория:",
     "Tags": "Теги:",
     "Read": "Прочитать",
@@ -100,7 +100,7 @@
     "ReviewTitle": "Заголовок обзора",
     "CreationDate": "Дата создания",
     "Category": "Категория",
-    "Product": "Произведение",
+    "Product": "Тема",
     "CommentsCount": "Кол-во комментариев",
     "AverageRate": "Средняя оценка",
     "Actions": "Действия",

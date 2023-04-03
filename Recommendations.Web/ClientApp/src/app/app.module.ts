@@ -77,7 +77,7 @@ import {LinkedReviewsComponent} from "./linked-reviews/linked-reviews.component"
     FormsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'registration', component: RegistrationComponent},
+      // {path: 'registration', component: RegistrationComponent},
       {path: 'login', component: LoginComponent},
       {path: 'login-callback', component: LoginCallbackComponent},
       {path: 'create-review', component: CreateReviewComponent, canActivate: [AuthGuard]},
