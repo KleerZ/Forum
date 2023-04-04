@@ -4,7 +4,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Recommendations.Application.CommandsQueries.Review.Queries.GetMostRatedList;
 using Recommendations.Application.CommandsQueries.Review.Queries.GetRecentList;
-using Recommendations.Application.Common.Constants;
 using Recommendations.Application.Interfaces;
 
 namespace Recommendations.Application.CommandsQueries.Review.Queries.GetReviewsByParam;
@@ -35,9 +34,12 @@ public class GetReviewsByParamQueryHandler
             .Include(c => c.User)
             .ProjectTo<GetAllReviewsDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
+
         if (request.Tag is not null)
+        {
             reviews = reviews.Where(r => 
                 r.Tags.Contains(request.Tag)).ToList();
+        }
 
         return new GetAllReviewsVm { Reviews = reviews };
     }
