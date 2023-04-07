@@ -13,7 +13,6 @@ export class AppComponent {
   constructor (private themeService: ThemeService,
                private renderer: Renderer2,
                private translateService: TranslateService) {
-
   }
 
   ngOnInit(): void {
