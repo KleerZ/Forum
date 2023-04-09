@@ -1,7 +1,6 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Recommendations.Application.CommandsQueries.Review.Commands.Create;
 using Recommendations.Application.CommandsQueries.Review.Commands.Delete;
@@ -13,7 +12,6 @@ using Recommendations.Application.CommandsQueries.Review.Queries.GetReviewsByPar
 using Recommendations.Application.CommandsQueries.Review.Queries.GetReviewsByUserId;
 using Recommendations.Application.CommandsQueries.Review.Queries.GetUpdate;
 using Recommendations.Application.Common.Constants;
-using Recommendations.Persistence.Migrations;
 using Recommendations.Web.Models.Review;
 
 namespace Recommendations.Web.Controllers;
