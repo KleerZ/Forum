@@ -4,8 +4,10 @@
 }
 
 .avatar {
-  /*min-width: 150px;*/
-  /*min-height: 150px;*/
+  min-width: 150px !important;
+  min-height: 150px !important;
+  max-width: 150px !important;
+  max-height: 150px !important;
   /*border-radius: 100px;*/
   /*background: black;*/
   margin: 0;
