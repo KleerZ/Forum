@@ -11,6 +11,7 @@ public class GetUserDto : IMapWith<Domain.User>
     public int LikesCount { get; set; }
     public string UserName { get; set; }
     public string Email { get; set; }
+    public string ImageUrl { get; set; }
     
     public void Mapping(Profile profile)
     {
@@ -23,6 +24,8 @@ public class GetUserDto : IMapWith<Domain.User>
                 o => o.MapFrom(u => u.AccessStatus))
             .ForMember(u => u.UserName,
                 o => o.MapFrom(u => u.UserName))
+            .ForMember(u => u.ImageUrl,
+                o => o.MapFrom(u => u.ImageUrl))
             .ForMember(u => u.Email,
                 o => o.MapFrom(u => u.Email));
     }

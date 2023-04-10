@@ -73,4 +73,6 @@ export class AdminPageComponent implements OnInit {
     if (changeUser) changeUser.role = role
     await firstValueFrom(this.userService.setRole(userId, role))
   }
+
+    protected readonly firstValueFrom = firstValueFrom;
 }

@@ -5,4 +5,5 @@ export interface UserModel {
   likesCount: number
   userName: string
   email: string
+  imageUrl: string
 }

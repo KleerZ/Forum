@@ -60,6 +60,7 @@ blockquote {
   -ms-hyphens: auto;
   hyphens: auto;
   overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 app-fullscreen-loader {
@@ -71,3 +72,13 @@ app-fullscreen-loader {
   left: 0
 }
 
+.termsOfUse {
+  max-width: 500px;
+  background: none;
+  color: red;
+  border: none;
+}
+
+.termsOfUse:hover {
+  text-decoration: underline;
+}

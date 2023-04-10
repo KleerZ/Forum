@@ -11,7 +11,7 @@ export class ImageService {
 
   }
 
-  async getImages(files: File[], urls: string[]): Promise<File[]> {
+  async getImages(urls: string[]): Promise<File[]> {
     let images = await Promise.all(urls.map(url => firstValueFrom(this.http.get(url,
       {responseType: 'blob'}))));
     return images.map((image, index) => {

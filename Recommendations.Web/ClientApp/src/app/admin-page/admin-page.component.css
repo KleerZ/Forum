@@ -4,3 +4,11 @@
   align-items: center;
   text-align: center;
 }
+
+.avatar {
+  max-height: 45px;
+  max-width: 45px;
+  border-radius: 100px;
+  object-fit: cover;
+  margin-top: -5px;
+}

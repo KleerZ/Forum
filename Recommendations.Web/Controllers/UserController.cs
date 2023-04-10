@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Recommendations.Application.CommandsQueries.ExternalAuthentication.Queries.GetAuthenticationProperties;
 using Recommendations.Application.CommandsQueries.User.Commands.Block;
+using Recommendations.Application.CommandsQueries.User.Commands.ChangeAvatar;
 using Recommendations.Application.CommandsQueries.User.Commands.Delete;
 using Recommendations.Application.CommandsQueries.User.Commands.Registration;
 using Recommendations.Application.CommandsQueries.User.Commands.SetRole;
@@ -16,7 +17,6 @@ using Recommendations.Application.CommandsQueries.User.Queries.GetUserInfo;
 using Recommendations.Application.CommandsQueries.User.Queries.Login;
 using Recommendations.Application.Common.Constants;
 using Recommendations.Domain;
-using Recommendations.Web.Filters;
 using Recommendations.Web.Models.User;
 
 namespace Recommendations.Web.Controllers;
@@ -164,6 +164,17 @@ public class UserController : BaseController
         var unblockUserCommand = new UnblockUserCommand(userId);
         await Mediator.Send(unblockUserCommand);
 
+        return Ok();
+    }
+
+    [Authorize]
+    [HttpPost("changeAvatar")]
+    public async Task<ActionResult> ChangeAvatar([FromForm] ChangeAvatarDto avatarDto)
+    {
+        var changeAvatarCommand = Mapper.Map<ChangeAvatarCommand>(avatarDto);
+        changeAvatarCommand.UserId = CurrentUserId;
+        await Mediator.Send(changeAvatarCommand);
+        
         return Ok();
     }
 }

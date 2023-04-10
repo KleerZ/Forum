@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Recommendations.Application.CommandsQueries.Comment.Commands;
+using Recommendations.Application.CommandsQueries.Comment.Queries;
 using Recommendations.Application.CommandsQueries.Comment.Queries.GetAll;
 using Recommendations.Web.Models.Comment;
 
@@ -28,7 +29,7 @@ public class CommentController : BaseController
     
     [AllowAnonymous]
     [HttpGet("{reviewId:guid}")]
-    public async Task<ActionResult<IEnumerable<GetAllCommentsDto>>> GetAll(Guid reviewId)
+    public async Task<ActionResult<IEnumerable<GetCommentDto>>> GetAll(Guid reviewId)
     {
         var getAllCommentsQuery = new GetAllCommentsQuery(reviewId);
         var commentsVm = await Mediator.Send(getAllCommentsQuery);

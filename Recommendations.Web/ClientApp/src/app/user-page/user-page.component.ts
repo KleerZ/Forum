@@ -8,6 +8,9 @@ import {ActivatedRoute} from "@angular/router";
 import {UserModel} from "../../common/models/UserModel";
 import {UserService} from "../../common/services/user/user.service";
 import {firstValueFrom} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {formToFormData} from "../../common/functions/formToFormData";
+import {ImageService} from "../../common/services/images/image-service";
 
 @Component({
   selector: 'app-user-page',
@@ -20,13 +23,19 @@ export class UserPageComponent implements OnInit {
   reviews!: ReviewUserPageModel[]
   rows!: ReviewUserPageModel[]
   userData!: UserModel
+  file!: File | undefined
+  files?: File[] = []
+  isNotImageChanged: boolean = true
 
   userId?: number | null = null
+  currentUserId?: number
 
   constructor(public reviewsService: ReviewsService,
               private filtrationService: FiltrationReviewService,
               private activatedRoute: ActivatedRoute,
-              private userService: UserService) {
+              private userService: UserService,
+              private http: HttpClient,
+              private imageService: ImageService) {
 
   }
 
@@ -37,6 +46,7 @@ export class UserPageComponent implements OnInit {
 
   async ngOnInit() {
     this.getUserIdFromQueryParams()
+    await this.getAvatar()
     await this.getReviews()
     await this.getUserInfo(this.userId!)
   }
@@ -83,5 +93,41 @@ export class UserPageComponent implements OnInit {
 
   resetFiltration() {
     this.rows = this.reviews
+  }
+
+  onSelectImage(event: any) {
+    if (event.addedFiles[0] === undefined)
+      return;
+
+    this.file = <File>event.addedFiles[0]
+    this.isNotImageChanged = false
+    this.imageChangeForm.patchValue({image: this.file})
+  }
+
+  onRemoveImage(event: any) {
+    this.file = undefined;
+    this.isNotImageChanged = false
+    this.imageChangeForm.patchValue({image: undefined})
+  }
+
+  imageChangeForm = new FormGroup({
+    image: new FormControl()
+  })
+
+  sendImage() {
+    this.http.post("api/user/changeAvatar", formToFormData(this.imageChangeForm))
+      .subscribe({})
+  }
+
+  async getAvatar() {
+    let userInfo = await firstValueFrom(this.userService.getUserInfo())
+    if (userInfo.imageUrl !== null) {
+      this.file = (await this.imageService.getImages([userInfo.imageUrl]))[0]
+    }
+  }
+
+  async getCurrentUserId() {
+    let currentUser = await firstValueFrom(this.userService.getUserInfo());
+    this.currentUserId = currentUser.id
   }
 }

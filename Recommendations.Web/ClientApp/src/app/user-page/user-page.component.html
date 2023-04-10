@@ -2,6 +2,30 @@
 
 <div *ngIf="waiter" class="row w-100 m-0 p-0">
 
+  <div class="w-100 d-flex justify-content-center align-content-center ">
+    <div class="w-auto d-flex justify-content-center flex-column">
+      <ngx-dropzone [disabled]="currentUserId !== this.userId" [accept]="'image/*'" class="w-100  mb-2
+              d-flex justify-content-center avatar" (change)="onSelectImage($event)">
+        <ngx-dropzone-image-preview *ngIf="file !== undefined"
+                                    [file]="file!" class="w-100"
+                                    [removable]="true"
+                                    (removed)="onRemoveImage(file)"
+
+        >
+        </ngx-dropzone-image-preview>
+        <ngx-dropzone-label *ngIf="file === undefined"
+                            class="w-100">{{'ReviewForm.AddImage' | translate}}
+        </ngx-dropzone-label>
+      </ngx-dropzone>
+      <button [disabled]="isNotImageChanged"
+              [hidden]="currentUserId !== this.userId"
+              (click)="sendImage()"
+              class="btn btn-outline-primary w-auto mb-3">
+        Сохранить
+      </button>
+    </div>
+  </div>
+
   <h5 class="w-100 d-flex justify-content-center mb-3">{{userData.userName}}</h5>
 
   <div *ngIf="!userId" class="mb-3 m-0 p-0 mb-3">

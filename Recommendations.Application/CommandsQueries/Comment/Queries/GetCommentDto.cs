@@ -1,18 +1,19 @@
 using AutoMapper;
 using Recommendations.Application.Common.Mappings;
 
-namespace Recommendations.Application.CommandsQueries.Comment.Queries.GetAll;
+namespace Recommendations.Application.CommandsQueries.Comment.Queries;
 
-public class GetAllCommentsDto : IMapWith<Domain.Comment>
+public class GetCommentDto : IMapWith<Domain.Comment>
 {
     public string AuthorName { get; set; }
     public int AuthorLikesCount { get; set; }
     public DateTime CreationDate { get; set; }
     public string Text { get; set; }
+    public string ImageUrl { get; set; }
     
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<Domain.Comment, GetAllCommentsDto>()
+        profile.CreateMap<Domain.Comment, GetCommentDto>()
             .ForMember(u => u.AuthorLikesCount,
                 o => o.MapFrom(u => u.User.LikesCount))
             .ForMember(u => u.AuthorName,
@@ -20,6 +21,8 @@ public class GetAllCommentsDto : IMapWith<Domain.Comment>
             .ForMember(u => u.CreationDate,
                 o => o.MapFrom(u => u.CreationDate))
             .ForMember(u => u.Text,
-                o => o.MapFrom(u => u.Text));
+                o => o.MapFrom(u => u.Text))
+            .ForMember(u => u.ImageUrl,
+                o => o.MapFrom(u => u.User.ImageUrl));
     }
 }

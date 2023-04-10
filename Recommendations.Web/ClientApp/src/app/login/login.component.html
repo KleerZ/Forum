@@ -1,4 +1,4 @@
-<div class="w-100 d-flex justify-content-center align-items-center m-0 p-0">
+<div class="w-100 d-flex justify-content-center align-items-center m-0 p-0 flex-column">
 
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="col-lg-4 p-0 m-0 w-100" novalidate>
 
@@ -81,6 +81,8 @@
       <input value="{{'Forms.Titles.SignIn' | translate}}" [disabled]="!loginForm.valid" class="btn btn-primary w-100" type="submit">
     </div>
 
+    <app-terms></app-terms>
+
     <div class="col-12 flex-column mt-2">
       <span class="w-100 d-flex justify-content-center fw-semibold">
         {{'Forms.Titles.OrSignInWith' | translate}}
@@ -92,3 +94,5 @@
   </form>
 
 </div>
+
+

@@ -67,7 +67,7 @@
             </button>
             <span>{{review.likesCount}}</span>
           </div>
-<!--          <div class="wrap">{{'ReviewPage.AverageRating' | translate}} {{review.averageRate.toFixed(1)}}</div>-->
+          <!--          <div class="wrap">{{'ReviewPage.AverageRating' | translate}} {{review.averageRate.toFixed(1)}}</div>-->
         </div>
       </div>
 
@@ -78,7 +78,7 @@
 
       <h6 class="mb-2 wrap mt-3">{{'ReviewPage.ProductName' | translate}} {{review.productName}}</h6>
       <h6 class="mb-2 wrap">{{'ReviewPage.Category' | translate}} {{review.category}}</h6>
-<!--      <h6 class="mb-2 wrap">{{'ReviewPage.AuthorRating' | translate}} {{review.authorRate}}</h6>-->
+      <!--      <h6 class="mb-2 wrap">{{'ReviewPage.AuthorRating' | translate}} {{review.authorRate}}</h6>-->
       <h6 class="wrap">{{'ReviewPage.Tags' | translate}} {{review.tags}}</h6>
     </div>
 
@@ -110,14 +110,23 @@
     <div class="comments-container no-print">
 
       <div class="comment mb-2" *ngFor="let comment of this.signalrService.comments">
-        <span class="comment-head mb-2">
-          <div class="mr-3 wrap">{{comment.authorName}}</div>
-          <div class="wrap">{{comment.creationDate | date:'dd.MM.YY, HH:mm':'UTC+3'}}</div>
+        <img *ngIf="comment.imageUrl !== null" class="avatar mr-3" [src]="comment.imageUrl" alt="">
+        <svg *ngIf="comment.imageUrl === null" xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-person-circle avatar mr-3" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+        </svg>
+        <div>
+          <span class="comment-head mb-2 w-100">
+            <div class="mr-2 wrap">{{comment.authorName}}</div>
+            <div class="wrap">{{comment.creationDate | date:'dd.MM.YY, HH:mm':'UTC+3'}}</div>
         </span>
-        <div class="comment-text-container wrap">
-          {{comment.text}}
+          <div class="comment-text-container wrap">
+            {{comment.text}}
+          </div>
         </div>
       </div>
+
     </div>
+
   </div>
 </div>

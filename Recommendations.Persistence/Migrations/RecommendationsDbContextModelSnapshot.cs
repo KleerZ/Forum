@@ -391,6 +391,9 @@ namespace Recommendations.Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
+
                     b.Property<int>("LikesCount")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")

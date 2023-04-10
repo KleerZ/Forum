@@ -21,6 +21,14 @@
         </ng-template>
       </ngx-datatable-column>
 
+      <ngx-datatable-column [canAutoResize]="false" [sortable]="false" name="Id" prop="id">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div class="w-100 h-100 m-0 p-0 d-flex justify-content-center">
+            <img class="avatar" [src]="row.imageUrl" alt="">
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+
       <ngx-datatable-column [canAutoResize]="false" prop="userName" name="{{'Profile.UserName' | translate}}">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{row.userName}}

@@ -3,4 +3,5 @@ export interface CommentModel {
   authorLikesCount: number
   creationDate: Date
   text: string
+  imageUrl: string
 }

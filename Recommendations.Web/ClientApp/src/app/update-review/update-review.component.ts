@@ -93,7 +93,7 @@ export class UpdateReviewComponent implements OnInit {
   }
 
   async getImages(urls: string[]) {
-    this.files = await this.imageService.getImages(this.files, urls)
+    this.files = await this.imageService.getImages(urls)
   }
 
   async getAllProducts() {

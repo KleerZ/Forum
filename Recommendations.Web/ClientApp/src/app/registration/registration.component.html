@@ -1,4 +1,4 @@
-<div class="w-100 d-flex justify-content-center align-items-center">
+<div class="w-100 d-flex justify-content-center align-items-center flex-column">
 
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="col-lg-4 p-0 m-0 w-100">
 
@@ -102,6 +102,8 @@
     <div class="col-12 mt-3">
       <input [disabled]="!registrationForm.valid" class="btn btn-primary w-100" value="{{'Forms.Titles.SignUp' | translate}}" type="submit">
     </div>
+
+    <app-terms></app-terms>
 
     <div class="col-12 flex-column mt-2">
       <span class="w-100 d-flex justify-content-center fw-semibold">
