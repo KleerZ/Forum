@@ -8,6 +8,7 @@ public class User : IdentityUser<Guid>
     public int LikesCount { get; set; }
     public string AccessStatus { get; set; } 
     public string? ImageUrl { get; set; }
+    public string? FolderName { get; set; }
 
     public List<Discussion> Discussions { get; set; } = new();
     public List<Like> Likes { get; set; } = new();

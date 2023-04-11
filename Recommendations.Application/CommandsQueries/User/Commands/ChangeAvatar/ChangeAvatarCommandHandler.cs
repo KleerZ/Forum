@@ -22,11 +22,21 @@ public class ChangeAvatarCommandHandler : IRequestHandler<ChangeAvatarCommand, U
         CancellationToken cancellationToken)
     {
         var user = await GetUser(request.UserId);
+        
+        if (user.FolderName != string.Empty)
+            await _firebaseService.DeleteFolder(user.FolderName!);
 
-        user.ImageUrl = request.Image is not null
-            ? (await _firebaseService.UploadFile(request.Image, 
-                Guid.NewGuid().ToString())).Url
-            : null;
+        if (request.Image is not null)
+        {
+            var folderName = Guid.NewGuid().ToString();
+            user.ImageUrl = (await _firebaseService.UploadFile(request.Image, folderName)).Url;
+            user.FolderName = folderName;
+        }
+        else
+        {
+            user.ImageUrl = null;
+            user.FolderName = null;
+        }
 
         _context.Users.Update(user);
         await _context.SaveChangesAsync(cancellationToken);
