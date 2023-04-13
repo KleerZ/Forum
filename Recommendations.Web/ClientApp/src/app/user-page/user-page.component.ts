@@ -115,7 +115,7 @@ export class UserPageComponent implements OnInit {
   })
 
   sendImage() {
-    this.http.post("api/user/changeAvatar", formToFormData(this.imageChangeForm))
+    this.http.post("api/user/change-avatar", formToFormData(this.imageChangeForm))
       .subscribe({})
   }
 

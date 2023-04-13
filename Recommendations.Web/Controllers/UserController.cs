@@ -168,7 +168,7 @@ public class UserController : BaseController
     }
 
     [Authorize]
-    [HttpPost("changeAvatar")]
+    [HttpPost("change-avatar")]
     public async Task<ActionResult> ChangeAvatar([FromForm] ChangeAvatarDto avatarDto)
     {
         var changeAvatarCommand = Mapper.Map<ChangeAvatarCommand>(avatarDto);
