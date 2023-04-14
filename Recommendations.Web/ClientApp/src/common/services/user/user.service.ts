@@ -63,7 +63,7 @@ export class UserService {
     return this.http.get<UserModel>(`${this.baseUrl}/get-info`)
   }
 
-  getUserInfoById(userId: number): Observable<UserModel> {
+  getUserInfoById(userId: any): Observable<UserModel> {
     return this.http.get<UserModel>(`${this.baseUrl}/get-info/${userId}`)
   }
 

@@ -120,9 +120,17 @@ export class UserPageComponent implements OnInit {
   }
 
   async getAvatar() {
-    let userInfo = await firstValueFrom(this.userService.getUserInfo())
-    if (userInfo.imageUrl !== null) {
-      this.file = (await this.imageService.getImages([userInfo.imageUrl]))[0]
+    if (this.userId !== undefined) {
+      let userInfo = await firstValueFrom(this.userService.getUserInfoById(this.userId))
+      if (userInfo.imageUrl !== null) {
+        this.file = (await this.imageService.getImages([userInfo.imageUrl]))[0]
+      }
+    }
+    else {
+      let userInfo = await firstValueFrom(this.userService.getUserInfo())
+      if (userInfo.imageUrl !== null) {
+        this.file = (await this.imageService.getImages([userInfo.imageUrl]))[0]
+      }
     }
   }
 
