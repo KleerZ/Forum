@@ -24,7 +24,7 @@
     </div>
 
     <div *ngIf="review.imagesUrls.length > 0" id="carouselExample"
-         class="carousel slide mb-3 d-flex justify-content-center">
+         class="carousel slide mb-3 d-flex justify-content-center shadow-sm">
       <div class="carousel-inner">
         <div class="carousel-item" [ngClass]="{'active': i === 0}"
              *ngFor="let image of review.imagesUrls; let i = index">
@@ -52,12 +52,12 @@
       </button>
     </div>
 
-    <div class="row d-flex flex-column p-0 mb-2">
-      <div class="title-container">
+    <div class="row d-flex flex-column p-0 mb-2 ">
+      <div class="title-container shadow-sm">
         <div class="row d-flex flex-row">
           <h4 id="review-title" class="mb-2 wrap">{{review.reviewTitle}}</h4>
 
-          <div class="h-100 d-flex w-auto mt-1 justify-content-center align-items-center flex-column">
+          <div class="h-100 d-flex w-auto mt-1 justify-content-center align-items-center flex-column ">
             <button [style.background]="this.review.isLike === true ? 'green' : 'black'"
                     id="likeBtn" (click)="onLike()" class="btn">
               <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -84,14 +84,14 @@
 
   </div>
 
-  <div class="row mb-3 m-0 p-0">
+  <div class="row mb-3 m-0 p-0 ">
     <div class="description wrap">
       <h5>{{'ReviewPage.Description' | translate}}</h5>
       <markdown class="wrap" [data]='review.description'></markdown>
     </div>
   </div>
 
-  <div class="row mb-3 no-print m-0 p-0">
+  <div class="row mb-3 no-print m-0 p-0 shadow-sm rounded border pt-2 pb-2">
     <h5 class="mb-2">{{'ReviewPage.Comments' | translate}}</h5>
 
     <div class="write-comment-container mb-3">

@@ -3,9 +3,9 @@
 <div *ngIf="waiter" class="row w-100 m-0 p-0">
 
   <div class="w-100 d-flex justify-content-center align-content-center ">
-    <div class="w-auto d-flex justify-content-center flex-column">
+    <div class="w-auto d-flex justify-content-center flex-column ">
       <ngx-dropzone [disabled]="currentUserId !== this.userId" [accept]="'image/*'" class="w-100  mb-2
-              d-flex justify-content-center avatar" (change)="onSelectImage($event)">
+              d-flex justify-content-center avatar  border border-2 shadow-sm rounded" (change)="onSelectImage($event)">
         <ngx-dropzone-image-preview *ngIf="file !== undefined"
                                     [file]="file!" class="w-100"
                                     [removable]="true"

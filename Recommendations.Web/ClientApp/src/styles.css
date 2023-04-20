@@ -50,8 +50,8 @@ blockquote {
 }
 
 .container-sm {
-  margin-top: 100px;
-  margin-bottom: 20px;
+  margin-top: 56px;
+  /*margin-bottom: 20px;*/
 }
 
 .wrap {
@@ -81,4 +81,20 @@ app-fullscreen-loader {
 
 .termsOfUse:hover {
   text-decoration: underline;
+}
+
+main {
+  margin-top: 56px !important;
+  min-height: calc(100vh - 56px) !important;
+  padding-top: 20px;
+}
+
+.main-body {
+  /*background-color: #120842;*/
+  /*background-image: linear-gradient(0deg, #120842 0%, #784BA0 49%, #FF3CAC 100%);*/
+  background-image: linear-gradient(to bottom right, #121C84, #8278DA);
+}
+
+.body-shadow {
+  box-shadow: 0px 4px 31px 19px rgba(0, 0, 0, 0.15);
 }

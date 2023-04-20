@@ -3,14 +3,14 @@
 
 <header>
   <nav
-    class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light border-bottom box-shadow mb-3"
+    class="navbar navbar-expand-lg navbar-toggleable-lg dark-navbar border-bottom box-shadow mb-3 shadow-sm"
   >
 
     <div class="container">
-      <a class="navbar-brand ml-3 navbar-btn" [routerLink]="['/']">Connect Forum</a>
+      <a class="navbar-brand ml-3" [routerLink]="['/']">Connect Forum</a>
 
       <button
-        class="navbar-toggler btn-outline-secondary mb-2"
+        class="navbar-toggler btn-outline-secondary"
         type="button"
         data-toggle="collapse"
         data-target=".navbar-collapse"
@@ -31,32 +31,32 @@
             <app-search class="mr-3 w-100 m-0 p-0 d-flex justify-content-center"></app-search>
           </li>
 
-<!--          <li class="d-flex mr-3">-->
-<!--            <div class="d-flex align-items-center">{{'Header.Theme' | translate}}</div>-->
-<!--            <app-theme-toggle></app-theme-toggle>-->
-<!--          </li>-->
+<!--                    <li class="d-flex mr-3">-->
+<!--                      <div class="d-flex align-items-center">{{'Header.Theme' | translate}}</div>-->
+<!--                      <app-theme-toggle></app-theme-toggle>-->
+<!--                    </li>-->
 
-<!--          <li class="mr-3 d-flex align-items-center">-->
-<!--            <language-dropdown></language-dropdown>-->
-<!--          </li>-->
+<!--                    <li class="mr-3 d-flex align-items-center">-->
+<!--                      <language-dropdown></language-dropdown>-->
+<!--                    </li>-->
 
-          <li *ngIf="userService.isAuthenticated" class="nav-item mr-3"
+          <li *ngIf="userService.isAuthenticated" class="nav-item mr-2"
               [routerLinkActive]="['link-active']">
-            <a class="navbar-btn" [routerLink]="['/profile']">
+            <a class="btn btn-outline-light" [routerLink]="['/profile']">
               {{'Header.Profile' | translate}}
             </a>
           </li>
 
-          <li *ngIf="userService.isAdmin && userService.isAuthenticated" class="nav-item mr-3"
+          <li *ngIf="userService.isAdmin && userService.isAuthenticated" class="nav-item mr-2"
               [routerLinkActive]="['link-active']">
-            <a class="navbar-btn" [routerLink]="['/admin-profile']">
+            <a class="btn btn-outline-light" [routerLink]="['/admin-profile']">
               {{'Header.AdminPanel' | translate}}
             </a>
           </li>
 
-          <li *ngIf="!userService.isAuthenticated" class="nav-item mr-3"
+          <li *ngIf="!userService.isAuthenticated" class="nav-item mr-2"
               [routerLinkActive]="['link-active']">
-            <a class="navbar-btn" [routerLink]="['/login']">
+            <a class="btn btn-outline-light" [routerLink]="['/login']">
               {{'Header.Login' | translate}}
             </a>
           </li>
@@ -68,7 +68,6 @@
 
   </nav>
 </header>
-
 
 
 

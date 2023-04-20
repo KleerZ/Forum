@@ -15,7 +15,7 @@ html {
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05) !important;
 }
 
 .material-symbols-outlined {
@@ -31,10 +31,11 @@ header {
   left: 0;
   top: 0;
   z-index: 100;
+  margin-bottom: 50px;
 }
 
 :host-context(.bootstrap) nav {
-  background: white;
+  background: #342e2e;
 }
 
 :host-context(.bootstrap-dark) nav {
@@ -51,6 +52,29 @@ header {
   color: white !important;
 }
 
-:host-context(.bootstrap) .navbar-btn {
-  color: #212529 !important;
+:host-context(.bootstrap) .btn-outline-light {
+  color: #dedede !important;
+  font-weight: 450;
+  border: 1px solid #646464 !important;
+}
+
+:host-context(.bootstrap) .btn-outline-light:hover {
+  color: black !important;
+  text-decoration: none;
+}
+
+:host-context(.bootstrap) .navbar-brand {
+  color: white !important;
+  font-weight: 500;
+}
+
+::ng-deep .search-form-control {
+  background-color: #0d1117 !important;
+  color: white !important ;
+  border: 1px solid #646464 !important;
+}
+
+.dark-navbar {
+  background-color: #161b22 !important;
+  border: lightgrey !important;
 }
