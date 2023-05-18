@@ -19,7 +19,7 @@ public class CreateReviewCommandValidator : AbstractValidator<CreateReviewComman
         RuleFor(command => command.CategoryName).NotEmpty();
         
         RuleFor(command => command.Description)
-            .MinimumLength(100)
+            .MinimumLength(10)
             .MaximumLength(20000);
 
         RuleFor(command => command.Tags).NotEmpty();
