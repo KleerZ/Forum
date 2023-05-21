@@ -21,7 +21,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column [canAutoResize]="false" [sortable]="false" name="Id" prop="id">
+      <ngx-datatable-column [canAutoResize]="false" [sortable]="false" name="Изображение" prop="id">
         <ng-template let-row="row" ngx-datatable-cell-template>
           <div class="w-100 h-100 m-0 p-0 d-flex justify-content-center">
             <img class="avatar" [src]="row.imageUrl" alt="">
@@ -90,12 +90,12 @@
              <button (click)="setRole(row.id, userRole)"
                      type="button"
                      class="btn btn-dark">
-               User
+               Пользователь
              </button>
              <button (click)="setRole(row.id, adminRole)"
                      type="button"
                      class="btn btn-success">
-               Admin
+               Администратор
              </button>
            </div>
 
